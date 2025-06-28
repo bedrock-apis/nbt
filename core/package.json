@@ -1,6 +1,6 @@
 {
   "name": "@bedrock-apis/nbt-core",
-  "version": "0.0.1.alpha.1",
+  "version": "0.0.1-alpha.1",
   "description": "Shared Types and minimal code for NBT packages",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
