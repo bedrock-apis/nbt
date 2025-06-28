@@ -1,0 +1,30 @@
+{
+  "name": "@bedrock-apis/nbt-core",
+  "version": "0.0.1.alpha.1",
+  "description": "Shared Types and minimal code for NBT packages",
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "type":"module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bedrock-apis/nbt.git"
+  },
+  "files": [
+    "./LICENSE",
+    "./dist/main.d.ts",
+    "./dist/main.js",
+    "./package.json",
+    "./README.md"
+  ],
+  "keywords": [
+    "NBT",
+    "bedrock",
+    "core"
+  ],
+  "author": "conmaster2112",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bedrock-apis/nbt/issues"
+  },
+  "homepage": "https://github.com/bedrock-apis/nbt#readme"
+}
