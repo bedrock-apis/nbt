@@ -1,7 +1,7 @@
 {
   "name": "@bedrock-apis/nbt-core",
   "version": "0.0.1-alpha.1",
-  "description": "Shared Types and minimal code for NBT packages",
+  "description": "Solid NBT package, with multiple formats",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "type": "module",
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/bedrock-apis/nbt/issues"
   },
-  "homepage": "https://github.com/bedrock-apis/nbt#readme"
+  "homepage": "https://github.com/bedrock-apis/nbt#readme",
+  "dependencies": {
+    "@bedrock-apis/nbt-core": "link:..\\core"
+  }
 }
