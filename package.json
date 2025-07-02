@@ -4,6 +4,7 @@
 		"build": "rolldown -c"
 	},
 	"devDependencies": {
+		"@types/deno": "^2.3.0",
 		"rolldown": "1.0.0-beta.21",
 		"rolldown-plugin-dts": "^0.13.12"
 	},

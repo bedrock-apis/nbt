@@ -21,6 +21,12 @@
     "bedrock",
     "core"
   ],
+  "exports": {
+    "./async": {
+      "import": "./dist/async.js",
+      "types":"./dist/async.d.ts"
+    }
+  },
   "author": "conmaster2112",
   "license": "MIT",
   "bugs": {
@@ -28,6 +34,6 @@
   },
   "homepage": "https://github.com/bedrock-apis/nbt#readme",
   "dependencies": {
-    "@bedrock-apis/nbt-core": "link:..\\core"
+    "@bedrock-apis/nbt-core": "^0.0.0"
   }
 }

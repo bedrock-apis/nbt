@@ -7,5 +7,16 @@ export default [
         output: {
             dir: "./core/dist"
         }
+    },
+    {
+        external: /^@/,
+        input: {
+            main: "./main/main.ts",
+            async: "./main/async/main.ts"
+        },
+        plugins: [dts({isolatedDeclarations: true})],
+        output: {
+            dir: "./main/dist"
+        }
     }
 ] as RolldownOptions[]

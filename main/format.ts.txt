@@ -1,0 +1,41 @@
+
+import { TagType, IDataCursor } from '@bedrock-apis/nbt-core';
+
+export interface NBTFormatReader {
+   readType(cursor: IDataCursor): TagType;
+   readStringLength(cursor: IDataCursor): number;
+   readArrayLength(cursor: IDataCursor): number;
+
+   [TagType.Byte](cursor: IDataCursor): number;
+   [TagType.Short](cursor: IDataCursor): number;
+   [TagType.Int](cursor: IDataCursor): number;
+   [TagType.Long](cursor: IDataCursor): bigint;
+   [TagType.Float](cursor: IDataCursor): number;
+   [TagType.Double](cursor: IDataCursor): number;
+   [TagType.ByteArray](cursor: IDataCursor): Uint8Array;
+
+   [TagType.String](cursor: IDataCursor): string;
+   [TagType.IntArray](cursor: IDataCursor): Int32Array;
+   [TagType.LongArray](cursor: IDataCursor): BigInt64Array;
+   [TagType.List](cursor: IDataCursor): unknown[];
+   [TagType.Compound](cursor: IDataCursor): object;
+}
+export interface NBTFormatWriter {
+   writeType(cursor: IDataCursor, value: TagType): void;
+   writeStringLength(cursor: IDataCursor, length: number): void;
+   writeArrayLength(cursor: IDataCursor, length: number): void;
+
+   [TagType.Byte](cursor: IDataCursor, value: number): void;
+   [TagType.Short](cursor: IDataCursor, value: number): void;
+   [TagType.Int](cursor: IDataCursor, value: number): void;
+   [TagType.Long](cursor: IDataCursor, value: bigint): void;
+   [TagType.Float](cursor: IDataCursor, value: number): void;
+   [TagType.Double](cursor: IDataCursor, value: number): void;
+   [TagType.ByteArray](cursor: IDataCursor, value: Uint8Array): void;
+
+   [TagType.String](cursor: IDataCursor, value: string): void;
+   [TagType.IntArray](cursor: IDataCursor, value: Int32Array): void;
+   [TagType.LongArray](cursor: IDataCursor, value: BigInt64Array): void;
+   [TagType.List](cursor: IDataCursor, value: unknown[]): void;
+   [TagType.Compound](cursor: IDataCursor, value: object): void;
+}
