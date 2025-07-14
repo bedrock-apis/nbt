@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@bedrock-apis/nbt-core':
+        specifier: link:./core
+        version: link:core
       '@types/deno':
         specifier: ^2.3.0
         version: 2.3.0

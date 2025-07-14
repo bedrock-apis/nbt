@@ -22,6 +22,7 @@ export interface Constructor<T extends Prototype<unknown>> {
     readonly internalTagType: TagType;
 }
 export interface Prototype<T = number> {
+    value: T;
     readonly internalTagType: TagType;
     valueOf(): T;
 }

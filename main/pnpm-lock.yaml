@@ -9,5 +9,5 @@ importers:
   .:
     dependencies:
       '@bedrock-apis/nbt-core':
-        specifier: link:..\core
+        specifier: link:../core
         version: link:../core

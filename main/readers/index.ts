@@ -15,3 +15,4 @@ export function parseExplicitSync<T = unknown>(cursor: IDataCursor, type: TagTyp
 export function parseSync<T = unknown>(cursor: IDataCursor, format: ReaderLike = NBT_FORMAT_READER): T {
     return format[format.readType(cursor) as 1](cursor) as T;
 }
+export * from "./typed-reader";

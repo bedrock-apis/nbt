@@ -1,8 +1,7 @@
 import { IDataCursor, TagType } from "@bedrock-apis/nbt-core";
 import { WriterLike } from "./writer-like";
+import { UTF8_BUFFER_HELPER, UTF8_ENCODER } from "../shared";
 
-const UTF8_ENCODER = new TextEncoder();
-export const UTF8_BUFFER_HELPER0: Uint8Array = new Uint8Array(32768);
 const { keys } = Object;
 export class GeneralWriter implements WriterLike {
     public constructor(
@@ -48,10 +47,10 @@ export class GeneralWriter implements WriterLike {
     }
     public 8(cursor: IDataCursor, _: string): void {
         if (_.length == 0) return void this.writeStringLength(cursor, 0);
-        const { written } = this.textEncoder.encodeInto(_, UTF8_BUFFER_HELPER0);
+        const { written } = this.textEncoder.encodeInto(_, UTF8_BUFFER_HELPER);
         this.writeStringLength(cursor, written);
-        cursor.buffer.set(UTF8_BUFFER_HELPER0.subarray(0, written), cursor.pointer);
-        cursor.pointer += UTF8_BUFFER_HELPER0.byteLength;
+        cursor.buffer.set(UTF8_BUFFER_HELPER.subarray(0, written), cursor.pointer);
+        cursor.pointer += written;
     }
     public 9(cursor: IDataCursor, _: unknown[]): void {
         if (_.length === 0) {

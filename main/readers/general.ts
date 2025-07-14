@@ -1,7 +1,7 @@
 import { IDataCursor, TagType } from "@bedrock-apis/nbt-core";
 import { ReaderLike } from "./reader-like";
+import { UTF8_DECODER } from "../shared";
 
-const UTF8_DECODER = new TextDecoder();
 export class GeneralReader implements ReaderLike {
     public constructor(
         public readonly littleEndian: boolean,
@@ -99,17 +99,16 @@ export class GeneralReader implements ReaderLike {
         if (!(type in this)) throw new SyntaxError('Unexpected NBT token type: ' + type);
         // Do not use Array.from, its slow as hell, i know ecma didn't cooked well with this one
         const _: unknown[] = new Array(length);
-        const func: (c: IDataCursor) => unknown = this[type as 1].bind(this, cursor);
-        for (let i = 0; i < length; i++) _[i] = func(cursor);
+        const func: () => unknown = this[type as 1].bind(this, cursor);
+        for (let i = 0; i < length; i++) _[i] = func();
         return _;
     }
     public 10(cursor: IDataCursor): object {
         // Empty Object prototype for safety, maybe for performance as well?
-        const _: Record<string, unknown> = Object.create(null);
+        const _: Record<string, unknown> = {};
         let type;
         while((type = this.readType(cursor)) !== 0)
             _[this["8"](cursor)] = this[type](cursor);
-        Reflect.setPrototypeOf(_, Object.prototype);
         return _;
     }
 }
