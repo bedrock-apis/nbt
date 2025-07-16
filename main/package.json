@@ -1,5 +1,5 @@
 {
-  "name": "@bedrock-apis/nbt-main",
+  "name": "@bedrock-apis/nbt",
   "version": "0.0.1-alpha.1",
   "description": "Solid NBT package, with multiple formats",
   "main": "./dist/main.js",
@@ -18,12 +18,13 @@
   "keywords": [
     "NBT",
     "bedrock",
-    "core"
+    "java",
+    "fast"
   ],
   "exports": {
     "./async": {
       "main": "./dist/async.js",
-      "types":"./dist/async.d.ts"
+      "types": "./dist/async.d.ts"
     }
   },
   "author": "conmaster2112",
@@ -33,6 +34,6 @@
   },
   "homepage": "https://github.com/bedrock-apis/nbt#readme",
   "dependencies": {
-    "@bedrock-apis/nbt-core": "link:../core"
+    "@bedrock-apis/nbt-core": "^0.0.1-alpha.1"
   }
 }

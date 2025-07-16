@@ -1,6 +1,6 @@
 import { IDataCursor, TagType } from "@bedrock-apis/nbt-core";
 import { ReaderLike } from "./reader-like";
-import { UTF8_DECODER } from "../shared";
+import { readVarInt32, readVarInt64, UTF8_DECODER, zigZagDecode32, zigZagDecode64 } from "../shared";
 
 export class GeneralReader implements ReaderLike {
     public constructor(
@@ -13,9 +13,9 @@ export class GeneralReader implements ReaderLike {
         this.prototype.readArrayLength = this.prototype[TagType.Int];
         this.prototype.readStringLength = this.prototype[TagType.Short];
     }
-    public readType(_: IDataCursor): TagType{return 0;};
-    public readArrayLength(_: IDataCursor): number {return 0;}
-    public readStringLength(_: IDataCursor): number {return 0;}
+    public readType(_: IDataCursor): TagType { return 0; };
+    public readArrayLength(_: IDataCursor): number { return 0; }
+    public readStringLength(_: IDataCursor): number { return 0; }
 
     /**
      *  TagType.byte
@@ -89,7 +89,7 @@ export class GeneralReader implements ReaderLike {
         const length = this.readArrayLength(cursor);
         const _ = new BigInt64Array(length);
         const func = this["4"].bind(this, cursor);
-        for (let i = 0; i < length; i++) _[i] =  func();
+        for (let i = 0; i < length; i++) _[i] = func();
         return _;
     }
     public 9(cursor: IDataCursor): unknown[] {
@@ -107,19 +107,17 @@ export class GeneralReader implements ReaderLike {
         // Empty Object prototype for safety, maybe for performance as well?
         const _: Record<string, unknown> = {};
         let type;
-        while((type = this.readType(cursor)) !== 0)
+        while ((type = this.readType(cursor)) !== 0)
             _[this["8"](cursor)] = this[type](cursor);
         return _;
     }
 }
 export class GeneralVariantReader extends GeneralReader {
     static {
+        this.prototype[4] = readVarInt64;
         this.prototype.readArrayLength =
             this.prototype.readStringLength =
-            this.prototype[TagType.Int];
-    }
-    public override 3(cursor: IDataCursor): number{
-        throw new ReferenceError("No Implementation")
+            this.prototype[3] = readVarInt32;
     }
 }
 export const NBT_FORMAT_READER: GeneralReader = new GeneralReader(true, UTF8_DECODER);

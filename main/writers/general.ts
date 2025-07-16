@@ -1,6 +1,6 @@
 import { IDataCursor, TagType } from "@bedrock-apis/nbt-core";
 import { WriterLike } from "./writer-like";
-import { UTF8_BUFFER_HELPER, UTF8_ENCODER } from "../shared";
+import { UTF8_BUFFER_HELPER, UTF8_ENCODER, writeVarInt32, writeVarInt64, zigZagEncode32, zigZagEncode64 } from "../shared";
 
 const { keys } = Object;
 export class GeneralWriter implements WriterLike {
@@ -90,6 +90,8 @@ export class GeneralWriter implements WriterLike {
         const writer = this[4].bind(this, cursor);
         for (let i = 0; i < length; i++) writer(_[i]);
     }
+    //NOTE - We could think of prototype based serialization something like
+    // new Byte().serializeNBT(cursor, format); and recursively like that
     public determinateType(_: unknown): TagType {
         switch (typeof _) {
             case "bigint": return 5;
@@ -104,12 +106,10 @@ export class GeneralWriter implements WriterLike {
 }
 export class GeneralVariantWriter extends GeneralWriter {
     static {
+        this.prototype[4] = writeVarInt64;
         this.prototype.writeArrayLength =
             this.prototype.writeStringLength =
-            this.prototype[TagType.Int];
-    }
-    public override 3(_cursor: IDataCursor, _: number): void {
-        throw new ReferenceError("No Implementation");
+            this.prototype[3] = writeVarInt32;
     }
 }
 export const NBT_FORMAT_WRITER: GeneralWriter = new GeneralWriter(true, UTF8_ENCODER);

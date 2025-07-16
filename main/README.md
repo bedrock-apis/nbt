@@ -1,0 +1,8 @@
+# Do not use "/async" exports yet
+# Changelog
+- `1.0.0-alpha.1`
+    - First Release for sync apis
+    - Added Network-Java NBT (Big-Endian with VarInt encoding for i32 and i64)
+    - Added Network-Bedrock NBT (Little-Endian  with VarInt encoding for i32 and i64)
+    - Added Java NBT (Big-Endian)
+    - Added Bedrock NBT (Little-Endian)
