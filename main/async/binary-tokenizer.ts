@@ -11,10 +11,10 @@ export enum ReadMode {
 export const VALUE_SIZES: Record<number, number> = {
     1: 1,
     2: 2,
-    3: 4,
-    4: 8,
-    // Indeed this is correct, variable size int for network nbt requires 5 bytes at most
-    5: 5,
+    // Indeed this is correct, variable size int for network nbt requires 5 bytes for int32 and 10bytes for int64 at most
+    3: 5,
+    4: 10,
+    5: 4,
     6: 8,
 };
 export const TYPE_TOKENS: Record<number, new (v: any) => Token> = {
