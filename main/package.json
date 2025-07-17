@@ -1,9 +1,7 @@
 {
   "name": "@bedrock-apis/nbt",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "Solid NBT package, with multiple formats",
-  "main": "./dist/main.js",
-  "types": "./dist/main.d.ts",
   "type": "module",
   "repository": {
     "type": "git",
@@ -22,8 +20,12 @@
     "fast"
   ],
   "exports": {
+    ".":{
+      "default": "./dist/main.js",
+      "types": "./dist/main.d.ts"
+    },
     "./async": {
-      "main": "./dist/async.js",
+      "default": "./dist/async.js",
       "types": "./dist/async.d.ts"
     }
   },
