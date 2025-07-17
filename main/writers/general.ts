@@ -94,8 +94,8 @@ export class GeneralWriter implements WriterLike {
     // new Byte().serializeNBT(cursor, format); and recursively like that
     public determinateType(_: unknown): TagType {
         switch (typeof _) {
-            case "bigint": return 5;
-            case "number": return 4;
+            case "bigint": return 4;
+            case "number": return 3; //int
             case "boolean": return 1;
             case "string": return 8;
             case "object":
