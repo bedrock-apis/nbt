@@ -1,5 +1,7 @@
 # Do not use "/async" exports yet
 # Changelog
+- `1.0.0-alpha.3`
+    - Fixed Determinate Type function resolving incorrect TagTypes for numbers and bigint
 - `1.0.0-alpha.2`
     - Fixed Problem with path imports not properly resolved
 - `1.0.0-alpha.1`
