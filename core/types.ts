@@ -19,11 +19,11 @@ const NUMBER_FACTORY = <T>(name: string, $: number | bigint) => {
 export interface Constructor<T extends Prototype<unknown>> {
     new(value?: T extends Prototype<infer V>?V:never): T;
     readonly prototype: T;
-    readonly internalTagType: TagType;
+    readonly __internal_tag_type__: TagType;
 }
 export interface Prototype<T = number> {
     value: T;
-    readonly internalTagType: TagType;
+    readonly __internal_tag_type__: TagType;
     valueOf(): T;
 }
 export interface Byte extends Prototype { }
@@ -44,41 +44,41 @@ export const
 
 declare global {
     interface Uint8ArrayConstructor {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface Int32ArrayConstructor {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface BigInt64ArrayConstructor {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface ArrayConstructor {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface StringConstructor {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface ObjectConstructor {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
 
     interface Uint8Array {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface Int32Array {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface BigInt64Array {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface Array<T> {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface String {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
     interface Object {
-        readonly internalTagType: number;
+        readonly __internal_tag_type__: number;
     }
 }
 {
@@ -87,7 +87,7 @@ declare global {
     for (let i = 0; i < impls.length; i++) {
         const type = impls[i];
         const property = { enumerable: false, configurable: true, writable: true, value: types[i] }
-        defineProperty(type, "internalTagType", property);
-        defineProperty(type.prototype, "internalTagType", property);
+        defineProperty(type, "__internal_tag_type__", property);
+        defineProperty(type.prototype, "__internal_tag_type__", property);
     }
 }

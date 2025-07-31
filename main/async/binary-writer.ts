@@ -35,11 +35,11 @@ export class TokenReader extends ReadableStream<Uint8Array> implements IDataCurs
                         controller.close();
                         return;
                     }
-                    if ((value as Byte).internalTagType < 7 /*ByteArray*/) {
-                        format[(value as Byte).internalTagType as 1](this, value.valueOf());
+                    if ((value as Byte).__internal_tag_type__ < 7 /*ByteArray*/) {
+                        format[(value as Byte).__internal_tag_type__ as 1](this, value.valueOf());
                         continue;
                     }
-                    switch ((value as Byte).internalTagType) {
+                    switch ((value as Byte).__internal_tag_type__) {
                         case TagType.ByteArray:
                             format.writeArrayLength(this, value.length);
                             this.pushChunk(controller, value);
@@ -50,7 +50,7 @@ export class TokenReader extends ReadableStream<Uint8Array> implements IDataCurs
                             this.pushChunk(controller, UTF8_BUFFER_HELPER.subarray(0, v.written));
                             continue;
                         default:
-                            throw new SyntaxError("Unexpected token type: " + (value as Byte).internalTagType);
+                            throw new SyntaxError("Unexpected token type: " + (value as Byte).__internal_tag_type__);
                     }
                 }
                 this.flush(controller);

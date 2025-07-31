@@ -1,6 +1,6 @@
 import { IDataCursor, TagType } from "@bedrock-apis/nbt-core";
 import { WriterLike } from "./writer-like";
-import { UTF8_BUFFER_HELPER, UTF8_ENCODER, writeVarInt32, writeVarInt64, zigZagEncode32, zigZagEncode64 } from "../shared";
+import { UTF8_BUFFER_HELPER, UTF8_ENCODER, writeVarInt32, writeVarInt64 } from "../shared";
 
 const { keys } = Object;
 export class GeneralWriter implements WriterLike {
@@ -99,7 +99,7 @@ export class GeneralWriter implements WriterLike {
             case "boolean": return 1;
             case "string": return 8;
             case "object":
-                return (_ as object).internalTagType ?? 10;
+                return (_ as object).__internal_tag_type__ ?? 10;
         }
         return 0;
     }

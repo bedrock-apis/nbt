@@ -1,7 +1,8 @@
 {
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"build": "powershell Remove-Item -Recurse -Force .\\main\\dist & rolldown -c",
+		"build": "rolldown -c",
 		"test": "pnpm run build & deno --allow-all ./tests/index.ts"
 	},
 	"devDependencies": {

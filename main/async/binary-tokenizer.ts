@@ -101,7 +101,7 @@ const GetTagType = (v: number): Byte => {
 }
 export class NBTTokenize {
     public static * getRootIterator(value: unknown, rootKey = ""): Iterator<NBTToken> {
-        const type = (value as Byte).internalTagType;
+        const type = (value as Byte).__internal_tag_type__;
         yield GetTagType(type);
         yield rootKey;
         if(type < 9) return void (yield * [value as Byte].values());
@@ -111,12 +111,12 @@ export class NBTTokenize {
     public static *10(value: object): Generator<NBTToken> {
         for (const key in value) {
             const valueType = (value[key as keyof object] as Byte);
-            if (!isFinite(valueType.internalTagType ?? NaN)) continue;
-            yield GetTagType(valueType.internalTagType);
+            if (!isFinite(valueType.__internal_tag_type__ ?? NaN)) continue;
+            yield GetTagType(valueType.__internal_tag_type__);
             yield key;
-            if (valueType.internalTagType < 9) yield valueType;
-            else if (valueType.internalTagType in this) yield* this[valueType.internalTagType as 10](valueType);
-            else throw new SyntaxError("No Serializer for " + valueType.internalTagType);
+            if (valueType.__internal_tag_type__ < 9) yield valueType;
+            else if (valueType.__internal_tag_type__ in this) yield* this[valueType.__internal_tag_type__ as 10](valueType);
+            else throw new SyntaxError("No Serializer for " + valueType.__internal_tag_type__);
         }
         yield GetTagType(0);
     }
@@ -128,13 +128,13 @@ export class NBTTokenize {
         }
 
         const valueType = (value[0] as Byte);
-        const tagType: number = valueType.internalTagType;
+        const tagType: number = valueType.__internal_tag_type__;
         if(tagType > 8 && !(tagType in this)) throw new ReferenceError("Not serializable tag type: " + tagType);
         yield GetTagType(tagType);
         yield new Int(value.length);
         for(let i = 0; i < value.length; i++){
             const v = value[i] as Byte;
-            const type = v?.internalTagType;
+            const type = v?.__internal_tag_type__;
             if(type !== tagType) throw new ReferenceError("Array has to be of only of the one type");
             if(type < 9) yield v;
             yield * this[type as 10](v);

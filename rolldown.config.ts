@@ -1,8 +1,13 @@
-import { RolldownOptions } from "rolldown";
+import { OutputOptions, RolldownOptions } from "rolldown";
 import {dts} from "rolldown-plugin-dts";
-export default [
+import {rm} from "node:fs/promises";
+
+const config = [
     {
-        input: "./core/main.ts",
+        input: {
+            main:"./core/main.ts",
+            types: "./core/types.ts"
+        },
         plugins: [dts({isolatedDeclarations: true})],
         output: {
             dir: "./core/dist"
@@ -19,4 +24,13 @@ export default [
             dir: "./main/dist"
         }
     }
-] as RolldownOptions[]
+] as RolldownOptions[];
+
+for(const entry of config){
+    const dir = (entry.output as OutputOptions)?.dir;
+    if(dir) await rm(dir, {force: true, recursive: true});
+}
+
+
+
+export default config;
