@@ -5,6 +5,8 @@ This version is in prerelease do not use it in production code
 Package for shared types with minimal execution logic.
 
 # Changelog
+- `0.0.1.alpha.3`
+    - Moved explicit number types to separated entry to avoid mess and prototype garbage
 - `0.0.1.alpha.2`
     - Refactored Typed Numbers to be standalone classes for performance gain.
     - Improved Types Schematics to inherit from shared prototype.
