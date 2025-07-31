@@ -1,8 +1,9 @@
-import { Byte, Double, Float, IDataCursor, Int, Long, Short, TagType } from "@bedrock-apis/nbt-core";
+import { IDataCursor,TagType } from "@bedrock-apis/nbt-core";
+import {Byte, Double, Float, Int, Short } from "@bedrock-apis/nbt-core/types";
 import { type WriterLike} from "../writers";
 import { UTF8_BUFFER_HELPER, UTF8_ENCODER } from "../shared";
 
-export type NBTToken = Byte | Short | Int | Long | bigint | Float | Double | string | Uint8Array;
+export type NBTToken = Byte | Short | Int | bigint | Float | Double | string | Uint8Array;
 export class TokenReader extends ReadableStream<Uint8Array> implements IDataCursor {
     public pointer: number = 0;
     public readonly view: DataView;

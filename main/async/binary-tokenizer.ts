@@ -1,4 +1,5 @@
-import { Byte, Double, Float, Int, Short, TagType } from "@bedrock-apis/nbt-core";
+import { TagType } from "@bedrock-apis/nbt-core";
+import {Byte, Double, Float, Int, Short } from "@bedrock-apis/nbt-core/types";
 import { BinaryDataTransformerInstance } from "./binary-source";
 import type { ReaderLike } from "../readers";
 import { type NBTToken } from "./binary-writer";
